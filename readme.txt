@@ -1,0 +1,4 @@
+ - If you are working on the bot run the dev server "npm run dev"
+ - To start the bot you can just run start_bot.bat or cmd node bot.js
+ - Modules is used for stuff like database.js
+ - All commands go in the commands folder
