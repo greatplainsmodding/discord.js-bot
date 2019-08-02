@@ -1,9 +1,7 @@
 {
-  "prefix": "!",
-
   "owners": ["141998619086684161"],
 
-  "admins": ["432233207140974592", "384187414584754176", "559610032233250818"],
+  "admins": ["432233207140974592", "384187414584754176", "559610032233250818", "325231623262044162"],
   
   "token": "NjA2MzE1NTgxMTA4Mzg3ODQy.XUJR-A.U28R3SxtVfygnMWuhYCpGXwjaYQ",
 
@@ -16,5 +14,18 @@
     "Guild Owner",
     "Bot Admins",
     "Bot Owners"
-  ]
+  ],
+
+  "Mysql": {
+    "host": "",
+    "user": "",
+    "password": "",
+    "database": "",
+    "table": ""
+  },
+
+  "guildConfig": {
+    "prefix": "!",
+    "disabledPlugins": []
+  }
 }

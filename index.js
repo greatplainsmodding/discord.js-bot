@@ -1,5 +1,6 @@
 const { Client, Collection, MessageEmbed } = require('discord.js');
-const walk = require('walk');
+const { statSync, readdirSync } = require('fs');
+const Mysql = require('./src/utils/MysqlWrapper');
 
 class Embed extends MessageEmbed {
   constructor(data) {
@@ -15,6 +16,7 @@ class Equalizer extends Client {
 
     this.config = require('./config.json');
     this.Embed = Embed;
+    this.db = new Mysql(this.config.Mysql);
     
     // cache
     this.plugins = new Collection();
@@ -41,41 +43,39 @@ const client = new Equalizer({
   disableEveryone: true
 });
 
-// plugin system reee
-walk.walk(`${__dirname}/src/plugins`)
-.on('directories', function(root, dirs) {
-  for (var dir of dirs) {
-    let plugin = new (require(`./src/plugins/${dir.name}/plugin`))(client);
+// plugin system ree
+let PluginsDir = readdirSync(`${__dirname}/src/plugins`)
+.filter(plugin => statSync(`${__dirname}/src/plugins/${plugin}`).isDirectory());
 
-    client.plugins.set(plugin.name, plugin);
+for (var dir of PluginsDir) {
+  let plugin = new (require(`./src/plugins/${dir}/plugin`))(client);
 
-    // handle the commands of each plugin
-    walk.walk(`${__dirname}/src/plugins/${dir.name}/${plugin.CommandsFolder}`)
-    .on('files', function(root, files) {
-      for (var file of files) {
-        let Command = new (require(`./src/plugins/${dir.name}/${plugin.CommandsFolder}/${file.name}`))(client);
+  client.plugins.set(plugin.name.toLowerCase(), plugin);
 
-        if (!Command.plugin)
-          Command.plugin = plugin.name;
-
-        client.commands.set(Command.name.toLowerCase(), Command);
-      }
-    });
-  }
-});
-
-// Handle the events
-walk.walk(`${__dirname}/src/events`)
-.on('files', function(root, files) {
-  files = files.filter(file => file.name.endsWith('.js'));
+  // command handler
+  let files = readdirSync(`${__dirname}/src/plugins/${dir}/${plugin.CommandsFolder}`)
+  .filter(command => statSync(`${__dirname}/src/plugins/${dir}/${plugin.CommandsFolder}/${command}`).isFile());
 
   for (var file of files) {
-    let event = new (require(`./src/events/${file.name}`))(client);
+    let Command = new (require(`./src/plugins/${dir}/${plugin.CommandsFolder}/${file}`))(client);
 
-    if (event.ignored) continue;
+    if (!Command.plugin)
+      Command.plugin = plugin.name;
 
-    client.on(event.name, (...args) => event.run(...args));
+    client.commands.set(Command.name.toLowerCase(), Command);
   }
-});
+}
+
+// Handle the events
+let Events = readdirSync(`${__dirname}/src/events`)
+.filter(event => statSync(`${__dirname}/src/events/${event}`).isFile());
+
+for (var file of Events) {
+  let event = new (require(`./src/events/${file}`))(client);
+
+  if (event.ignored) continue;
+
+  client.on(event.name, (...args) => event.run(...args));
+}
 
 client.login(client.config.token);
