@@ -27,6 +27,12 @@ module.exports = class {
     }
   }
 
+  /**
+   * Sets a value to the database and cache
+   * @param {String} key The key
+   * @param {Object|String|Number|Array|Buffer} value The value
+   */
+
   set(key, value) {
     this.cache.set(key, value)
 

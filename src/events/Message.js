@@ -41,7 +41,7 @@ module.exports = class extends Events {
 Sorry, but you cannot use this Command! You lack the permissions.
 You need the permission: **${this.client.config.PermissionNames[command.permlevel]}** to execute this Command!`);
 
-      command.run(msg, args);
+      command.run(msg, args, level);
     } else return;
   }
 };

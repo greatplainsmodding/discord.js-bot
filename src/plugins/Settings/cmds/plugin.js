@@ -17,13 +17,28 @@ module.exports = class extends Commands {
     if (!Plugin || !this.client.plugins.has(Plugin.toLowerCase()))
       return msg.reply('Invalid plugin given.');
 
-    if (Plugin.toLowerCase() === 'settings')
+    Plugin = args[0].toLowerCase()
+
+    if (Plugin === 'settings')
       return msg.reply('You can\'t disable the Settings plugin.');
 
     if (!Option || Option.toLowerCase() !== 'enable' && Option.toLowerCase() !== 'disable')
       return msg.reply('Please choose whether you want to disable or enable the plugin by typing: **enable/disable**');
 
-    settings.disabledPlugins.push(Plugin);
-    msg.channel.send(`Successfully ${Option}d the **${this.client.plugins.get(Plugin.toLowerCase()).name}** plugin.`);
+    if (Option.toLowerCase() === 'disable') {
+      settings.disabledPlugins.push(Plugin);
+      msg.channel.send(`Successfully disabled the **${this.client.plugins.get(Plugin).name}** plugin.`);
+    } else {
+      let index = settings.disabledPlugins.indexOf(Plugin);
+
+      if (index > -1) {
+        settings.disabledPlugins.splice(index, 1);
+        msg.channel.send(`Successfully enabled the **${this.client.plugins.get(Plugin).name}** plugin.`);
+      } else {
+        msg.channel.send(`The **${this.client.plugins.get(Plugin).name}** plugin is already enabled.`);
+      };
+    }
+
+    this.client.db.set(msg.guild.id, settings);
   }
 };
