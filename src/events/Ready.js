@@ -1,13 +1,24 @@
 const { Events } = require('../utils/base')
+const chalk = require('chalk');
+const Discord = require("discord.js");
+const readyWebhook = new Discord.WebhookClient("606646219732811836", "H5lV3ix04boTSw9L4J8STDivzZV0gHKCTCMTlgIzU5G1wLUlPAhQdJuO0CSA50Cg82Zy");
 
 module.exports = class extends Events {
-  constructor(client) {
-    super(client, {
-      name: 'ready'
-    })
-  }
+    constructor(client) {
+        super(client, {
+            name: 'ready'
+        })
+    }
 
-  run() {
-    console.log(`Logged in as ${this.client.user.tag}`);
-  }
+    run() {
+        console.log(chalk.greenBright('\n>> Bot is ready!'));
+        console.log('>> Logged in as ' + this.client.user.username + '\n>> Running on version: 1.0.0.0')
+        this.client.user.setActivity("Аматэрасу", { type: "WATCHING" });
+
+        const embed = new this.client.Embed()
+            .setTitle('Bot Status')
+            .setDescription(':satellite: ' + this.client.user.username + ' is now ready.')
+            .setTimestamp()
+        readyWebhook.send(embed);
+    }
 };
