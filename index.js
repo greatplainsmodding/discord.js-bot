@@ -6,7 +6,7 @@ class Embed extends MessageEmbed {
   constructor(data) {
     super(data);
 
-    this.hexColor = '#7289da';
+    this.color = 0x7289da;
   }
 };
 
