@@ -5,7 +5,8 @@ module.exports = class extends Commands {
     super(client, {
       name: 'plugin',
       aliases: ['module'],
-      usage: '<Plugin> <Enable/Disable>'
+      usage: '<Plugin> <Enable/Disable>',
+      permlevel: 4
     })
   }
 

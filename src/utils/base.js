@@ -30,6 +30,7 @@ module.exports = {
   Commands: class {
     constructor(client, {
       name = null,
+      desc = null,
       aliases = [],
       plugin = null,
       usage = null,
@@ -38,6 +39,7 @@ module.exports = {
       Object.defineProperty(this, 'client', { value: client, enumerable: false, writable: true });
 
       this.name = name;
+      this.desc = desc;
       this.aliases = aliases;
       this.plugin = plugin;
       this.usage = usage;
