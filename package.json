@@ -1,0 +1,22 @@
+{
+  "name": "equalizer",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/greatplainsmodding/Equalizer-Bot.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/greatplainsmodding/Equalizer-Bot/issues"
+  },
+  "homepage": "https://github.com/greatplainsmodding/Equalizer-Bot#readme",
+  "dependencies": {
+    "discord.js": "github:discordjs/discord.js#5af8cb8e6e7591e81f758a8b0f6748db7c2f12f1"
+  }
+}
