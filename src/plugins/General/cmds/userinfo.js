@@ -1,4 +1,7 @@
-const { Commands } = require('../../../utils/base');
+const {
+    Commands
+} = require('../../../utils/base');
+
 
 module.exports = class extends Commands {
     constructor(client) {
@@ -40,7 +43,6 @@ module.exports = class extends Commands {
                 .setFooter('Requested By: ' + msg.author.username)
                 .setTimestamp()
             msg.channel.send(embed);
-            console.log('User mentioned')
         } else {
             const status = {
                 online: "Online",
@@ -57,7 +59,6 @@ module.exports = class extends Commands {
 
             const id = msg.member.roles.highest.id
 
-
             // Sends Embed
             const embed = new this.client.Embed()
                 .setAuthor(this.client.user.username, this.client.config.logo)
@@ -69,7 +70,7 @@ module.exports = class extends Commands {
                 .addField('» User Roles', "" + userroles + "", false)
                 .addField('» Joined at', msg.member.joinedAt)
                 .addField('» Account Created', msg.author.createdAt)
-                .setFooter('Requested By: ' + msg.author.username)
+                .setFooter(`Requested By: ` + msg.author.username)
                 .setTimestamp()
             msg.channel.send(embed);
         }
