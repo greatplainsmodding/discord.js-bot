@@ -1,0 +1,29 @@
+{
+    "name": "equalizer-discord-bot",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "dependencies": {
+        "discord.js": "github:discordjs/discord.js",
+        "mongoose": "^5.6.7",
+        "mysql": "^2.17.1",
+        "nodemon": "^1.19.1",
+        "sync-mysql": "^3.0.1",
+        "walk": "^2.3.14"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "start": "node index.js",
+        "dev": "nodemon index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/greatplainsmodding/Equalizer-Bot.git"
+    },
+    "author": "Аматэрасу",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/greatplainsmodding/Equalizer-Bot/issues"
+    },
+    "homepage": "https://github.com/greatplainsmodding/Equalizer-Bot#readme"
+}
