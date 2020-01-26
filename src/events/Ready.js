@@ -1,7 +1,7 @@
 const { Events } = require('../utils/base')
 const chalk = require('chalk');
 const Discord = require("discord.js");
-const readyWebhook = new Discord.WebhookClient("606646219732811836", "H5lV3ix04boTSw9L4J8STDivzZV0gHKCTCMTlgIzU5G1wLUlPAhQdJuO0CSA50Cg82Zy");
+const readyWebhook = new Discord.WebhookClient("", "");
 
 module.exports = class extends Events {
     constructor(client) {
